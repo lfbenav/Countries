@@ -7,10 +7,17 @@
 <div *ngIf="country; else loading">
 
     <div class="row">
-        <div class="col-12">
-            <h2>País: <strong>{{ country.name.common }}</strong></h2>
-            <hr>
+        <div class="col-12 d-flex align-items-center">
+            <h2 class="d-inline">País: <strong>{{ country.name.common }}</strong></h2>
+            <h2 class="d-inline ms-auto">
+                <button 
+                    class="btn btn-danger py-0 px-3"
+                    [routerLink]="this.lastRoute"
+                    >Regresar
+                </button>
+            </h2>
         </div>
+        <hr style="margin-top: 8px;">
     </div>
 
     <div class="row">

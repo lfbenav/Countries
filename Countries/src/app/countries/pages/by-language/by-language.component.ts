@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
-import { Country } from '../../interfaces/countries.interface';
-import { CountriesService } from '../../services/countries.service';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { SearchBoxComponent } from '../../../shared/components/search-box/search-box.component';
 import { CountriesTableComponent } from '../../components/countries-table/countries-table.component';
+import { Country } from '../../interfaces/countries.interface';
+import { CountriesService } from '../../services/countries.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-by-country',
+  selector: 'app-by-language',
   imports: [SearchBoxComponent, CommonModule, CountriesTableComponent],
-  templateUrl: './by-country.component.html',
-  styleUrl: './by-country.component.scss'
+  templateUrl: './by-language.component.html',
+  styleUrl: './by-language.component.scss'
 })
-export class ByCountryComponent {
+export class ByLanguageComponent {
 
   public lastValue: string = '';
 
@@ -33,7 +33,7 @@ export class ByCountryComponent {
   }
 
   searchCountry(term: string): void {
-    this.countriesService.searchCountry(term)
+    this.countriesService.searchLanguage(term)
       .subscribe(countries => this.countries = countries);
   }
 

@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
 import { Country } from '../interfaces/countries.interface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,17 @@ import { Country } from '../interfaces/countries.interface';
 export class CountriesService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
+  private saveLocalStorage( term: string ): void {
+    const url = this.router.url;
+    sessionStorage.setItem('lastSearch', JSON.stringify([term, url]))
+  }
+
   searchCountry( term: string ): Observable<Country[]> {
+    this.saveLocalStorage(term);
     const url = `${environment.apiUrl}/name/${term}`;
     return this.http.get<Country[]>(url)
       .pipe(
@@ -22,6 +30,7 @@ export class CountriesService {
   }
 
   searchCapital( term: string ): Observable<Country[]> {
+    this.saveLocalStorage(term);
     const url = `${environment.apiUrl}/capital/${term}`;
     return this.http.get<Country[]>(url)
       .pipe(
@@ -30,7 +39,17 @@ export class CountriesService {
   }
 
   searchRegion( term: string ): Observable<Country[]> {
+    this.saveLocalStorage(term);
     const url = `${environment.apiUrl}/region/${term}`;
+    return this.http.get<Country[]>(url)
+      .pipe(
+        catchError( () => of([]) )
+      );
+  }
+
+  searchLanguage( term: string ): Observable<Country[]> {
+    this.saveLocalStorage(term);
+    const url = `${environment.apiUrl}/lang/${term}`;
     return this.http.get<Country[]>(url)
       .pipe(
         catchError( () => of([]) )

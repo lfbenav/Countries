@@ -11,11 +11,20 @@ export class SearchBoxComponent {
     @Input()
     public placeholder: string = '';
 
+    @Input()
+    public value: string = '';
+
     @Output()
     public onValue = new EventEmitter<string>();
 
     emitValue(value: string) {
       this.onValue.emit(value);
+    }
+
+    ngOnInit(): void {
+      if (this.value !== ''){
+        this.emitValue(this.value)
+      }
     }
 
 }
