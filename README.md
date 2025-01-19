@@ -1,3 +1,10 @@
-# Countries
+# Search Countries
 
-Luis Fernando Benavides Villegas
+![search](./search.png)  
+![info](./info.png)
+
+Ejecutar:
+```bash
+npm i
+ng serve -o
+```
